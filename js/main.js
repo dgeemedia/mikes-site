@@ -4,6 +4,22 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── Hero badge tap to reveal (mobile) ──
+  const badgeItems = document.querySelectorAll('.badge-item');
+  badgeItems.forEach(badge => {
+    badge.addEventListener('click', () => {
+      const isActive = badge.classList.contains('active');
+      badgeItems.forEach(b => b.classList.remove('active'));
+      if (!isActive) badge.classList.add('active');
+    });
+  });
+  // Close tooltip when tapping outside
+  document.addEventListener('click', e => {
+    if (!e.target.closest('.badge-item')) {
+      badgeItems.forEach(b => b.classList.remove('active'));
+    }
+  });
+
   // ── Navbar scroll behaviour ──
   const navbar = document.querySelector('.navbar');
   if (navbar) {
