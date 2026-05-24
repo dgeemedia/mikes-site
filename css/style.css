@@ -778,20 +778,130 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (max-width: 768px) {
+
+  /* ── Fullscreen mobile nav overlay ── */
   .nav-links { display: none; }
   .nav-links.open {
-    display: flex; flex-direction: column;
-    position: fixed; top: 72px; left: 0; right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 998;
     background: var(--primary);
-    padding: 28px 24px;
-    gap: 20px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    padding: 100px 32px 60px;
+    gap: 0;
+    overflow-y: auto;
   }
-  .hamburger { display: flex; }
-  .hero-badges-inner { flex-direction: column; height: auto; padding: 16px 0; }
-  .badge-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .nav-links.open li {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links.open li:first-child {
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-links.open a {
+    display: block;
+    padding: 20px 0;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.85);
+    transition: color 0.2s;
+  }
+  .nav-links.open a:hover,
+  .nav-links.open a.active { color: var(--accent); }
+  .nav-links.open a::after { display: none; }
+  .nav-links.open .nav-cta {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 20px 0;
+    background: transparent;
+    color: var(--accent) !important;
+    border-radius: 0;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px;
+  }
+  .mobile-social {
+    display: flex !important;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 36px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .mobile-social .social-link {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,0.08) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: rgba(255,255,255,0.7) !important;
+    flex-shrink: 0;
+    padding: 0 !important;
+  }
+  .mobile-social .social-link svg {
+    width: 18px !important;
+    height: 18px !important;
+    display: block !important;
+    flex-shrink: 0;
+    margin: 0 !important;
+  }
+  .mobile-social .social-link:hover {
+    background: var(--accent) !important;
+    color: var(--primary) !important;
+  }
+
+  /* Hamburger → X animation */
+  .hamburger {
+    display: flex;
+    position: relative;
+    z-index: 999;
+  }
+  .hamburger span { transition: all 0.3s ease; }
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0; transform: scaleX(0);
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  body.menu-open { overflow: hidden; }
+
+  /* ── Hero badges — fix text on small screens ── */
   .hero-badges { position: relative; }
+  .hero-badges-inner {
+    flex-direction: column;
+    height: auto;
+    padding: 0;
+  }
+  .badge-item {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 14px 20px;
+    min-width: unset;
+    width: 100%;
+    flex: unset;
+  }
+  .badge-item:last-child { border-bottom: none; }
+  .badge-item strong { font-size: 13px; white-space: normal; }
+  .badge-item span { font-size: 11px; white-space: normal; }
+  .badge-icon { flex-shrink: 0; width: 36px; height: 36px; font-size: 16px; }
+
   .hero { height: auto; padding: 120px 0 0; min-height: auto; }
+
+  /* ── Grids ── */
   .services-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .project-card.featured { grid-column: span 1; }
@@ -805,6 +915,7 @@ a { text-decoration: none; color: inherit; }
   .blog-grid { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr; }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-social { flex-wrap: wrap; }
 }
 
 /* ── SCROLL REVEAL ── */

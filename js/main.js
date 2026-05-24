@@ -12,17 +12,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ── Mobile menu ──
+  // ── Mobile menu — fullscreen overlay ──
   const hamburger = document.querySelector('.hamburger');
   const navLinks  = document.querySelector('.nav-links');
+
   if (hamburger && navLinks) {
     hamburger.addEventListener('click', () => {
+      const isOpen = navLinks.classList.contains('open');
       navLinks.classList.toggle('open');
       hamburger.classList.toggle('open');
+      document.body.classList.toggle('menu-open', !isOpen);
     });
-    // close on link click
+
     navLinks.querySelectorAll('a').forEach(a =>
-      a.addEventListener('click', () => navLinks.classList.remove('open'))
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      })
     );
   }
 
